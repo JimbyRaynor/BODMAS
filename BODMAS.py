@@ -13,15 +13,22 @@ current_script_directory = os.path.dirname(os.path.abspath(__file__))
 os.chdir(current_script_directory)
 
 # TODO
+# levels 1 to 10 have lots of simple instructions.
+# ->> Real BODMAS/ALGEBRA starts at level 11 
 # look at Algebra Tutorial 1
+# plut +- signs in stationary bubbles, like bubble bobble.
 # collecting things (numbers, fruit) is fun
 # use coloured +,-,*,/ signs randomly spread over screen to determine which +,-,*,/ gets executed
 # incorrect answer stalls (1+(2+3)) LHS stalls execution  ... start again to get full score + time score
+# OR simply do not pick up incorrect items until they are ready
+# once + is collected, highlight 2+3 in a box. Then need to collect 5 to proceed. This is better
 # GOAL: get highest possible score
 # Answer box in middle of screen
 # build tools for LHS (level editor, etc)
 # make a level inside a giant 3
+# collect A, B, etc to evaluate A, B ,etc
 # enemies chase car
+# computer player also collects items: have two +s, one for each player. Race to finish first
 # add math animation in background for each symbol of walls
 #       Same activity for 100 levels would be boring
 #       -> Need new activities for Maths
@@ -34,6 +41,9 @@ os.chdir(current_script_directory)
 # score is increased per remaining time
 # each level solves an equation. Show animation. Drive over steps in correct order, o/w fail.
 # create lots of libraries to shorten code
+# design levels that remove blocks after "+"" is collected so that all collections are automatically in order
+#  i.e. enclose second "+"" completely in blocks
+# first try succesful bonus score
 
 # execute CPU instructions to run program?
 
@@ -42,6 +52,8 @@ charPopsicle = [(0,1,"#8B4513"), (0,2,"#8B4513"), (0,3,"#8B4513"), (0,4,"#8B4513
 charPacmanStrawberry = [(0,6,"#FF0000"), (0,7,"#FF0000"), (0,8,"#FF0000"), (0,9,"#FF0000"), (1,5,"#FF0000"), (1,6,"#FF0000"), (1,7,"#FFFFFF"), (1,8,"#FF0000"), (1,9,"#FF0000"), (1,10,"#FF0000"), (1,11,"#FF0000"), (2,4,"#279627"), (2,5,"#FF0000"), (2,6,"#FF0000"), (2,7,"#FF0000"), (2,8,"#FF0000"), (2,9,"#FF0000"), (2,10,"#FFFFFF"), (2,11,"#FF0000"), (2,12,"#FF0000"), (3,4,"#279627"), (3,5,"#279627"), (3,6,"#FF0000"), (3,7,"#FF0000"), (3,8,"#FFFFFF"), (3,9,"#FF0000"), (3,10,"#FF0000"), (3,11,"#FF0000"), (3,12,"#FF0000"), (3,13,"#FF0000"), (4,4,"#279627"), (4,5,"#279627"), (4,6,"#FF0000"), (4,7,"#FF0000"), (4,8,"#FF0000"), (4,9,"#FF0000"), (4,10,"#FF0000"), (4,11,"#FF0000"), (4,12,"#FFFFFF"), (4,13,"#FF0000"), (5,3,"#FFFFFF"), (5,4,"#FFFFFF"), (5,5,"#279627"), (5,6,"#279627"), (5,7,"#FF0000"), (5,8,"#FFFFFF"), (5,9,"#FF0000"), (5,10,"#FFFFFF"), (5,11,"#FF0000"), (5,12,"#FF0000"), (5,13,"#FF0000"), (5,14,"#FF0000"), (6,4,"#279627"), (6,5,"#279627"), (6,6,"#FF0000"), (6,7,"#FF0000"), (6,8,"#FF0000"), (6,9,"#FF0000"), (6,10,"#FF0000"), (6,11,"#FF0000"), (6,12,"#FF0000"), (6,13,"#FF0000"), (7,4,"#279627"), (7,5,"#279627"), (7,6,"#FF0000"), (7,7,"#FFFFFF"), (7,8,"#FF0000"), (7,9,"#FF0000"), (7,10,"#FF0000"), (7,11,"#FF0000"), (7,12,"#FFFFFF"), (7,13,"#FF0000"), (8,4,"#279627"), (8,5,"#FF0000"), (8,6,"#FF0000"), (8,7,"#FF0000"), (8,8,"#FF0000"), (8,9,"#FFFFFF"), (8,10,"#FF0000"), (8,11,"#FF0000"), (9,5,"#FF0000"), (9,6,"#FFFFFF"), (9,7,"#FF0000"), (9,8,"#FF0000"), (9,9,"#FF0000"), (9,10,"#FF0000"), (9,11,"#FF0000"), (10,6,"#FF0000"), (10,7,"#FF0000"), (10,8,"#FF0000"), (10,9,"#FF0000")]
 
 charPlus = [(0,11,"#FFFF00"), (1,10,"#FFFF00"), (1,11,"#FFFF00"), (1,12,"#FFFF00"), (2,10,"#FFFF00"), (2,11,"#FFFF00"), (2,12,"#FFFF00"), (3,10,"#FFFF00"), (3,11,"#FFFF00"), (3,12,"#FFFF00"), (4,10,"#FFFF00"), (4,11,"#FFFF00"), (4,12,"#FFFF00"), (5,10,"#FFFF00"), (5,11,"#FFFF00"), (5,12,"#FFFF00"), (6,10,"#FFFF00"), (6,11,"#FFFF00"), (6,12,"#FFFF00"), (7,10,"#FFFF00"), (7,11,"#FFFF00"), (7,12,"#FFFF00"), (8,10,"#FFFF00"), (8,11,"#FFFF00"), (8,12,"#FFFF00"), (9,10,"#FFFF00"), (9,11,"#FFFF00"), (9,12,"#FFFF00"), (10,1,"#FFFF00"), (10,2,"#FFFF00"), (10,3,"#FFFF00"), (10,4,"#FFFF00"), (10,5,"#FFFF00"), (10,6,"#FFFF00"), (10,7,"#FFFF00"), (10,8,"#FFFF00"), (10,9,"#FFFF00"), (10,10,"#FFFF00"), (10,11,"#FFFF00"), (10,12,"#FFFF00"), (10,13,"#FFFF00"), (10,14,"#FFFF00"), (10,15,"#FFFF00"), (10,16,"#FFFF00"), (10,17,"#FFFF00"), (10,18,"#FFFF00"), (10,19,"#FFFF00"), (10,20,"#FFFF00"), (10,21,"#FFFF00"), (10,22,"#FFFF00"), (11,0,"#FFFF00"), (11,1,"#FFFF00"), (11,2,"#FFFF00"), (11,3,"#FFFF00"), (11,4,"#FFFF00"), (11,5,"#FFFF00"), (11,6,"#FFFF00"), (11,7,"#FFFF00"), (11,8,"#FFFF00"), (11,9,"#FFFF00"), (11,10,"#FFFF00"), (11,11,"#FFFF00"), (11,12,"#FFFF00"), (11,13,"#FFFF00"), (11,14,"#FFFF00"), (11,15,"#FFFF00"), (11,16,"#FFFF00"), (11,17,"#FFFF00"), (11,18,"#FFFF00"), (11,19,"#FFFF00"), (11,20,"#FFFF00"), (11,21,"#FFFF00"), (11,22,"#FFFF00"), (11,23,"#FFFF00"), (12,1,"#FFFF00"), (12,2,"#FFFF00"), (12,3,"#FFFF00"), (12,4,"#FFFF00"), (12,5,"#FFFF00"), (12,6,"#FFFF00"), (12,7,"#FFFF00"), (12,8,"#FFFF00"), (12,9,"#FFFF00"), (12,10,"#FFFF00"), (12,11,"#FFFF00"), (12,12,"#FFFF00"), (12,13,"#FFFF00"), (12,14,"#FFFF00"), (12,15,"#FFFF00"), (12,16,"#FFFF00"), (12,17,"#FFFF00"), (12,18,"#FFFF00"), (12,19,"#FFFF00"), (12,20,"#FFFF00"), (12,21,"#FFFF00"), (12,22,"#FFFF00"), (13,10,"#FFFF00"), (13,11,"#FFFF00"), (13,12,"#FFFF00"), (14,10,"#FFFF00"), (14,11,"#FFFF00"), (14,12,"#FFFF00"), (15,10,"#FFFF00"), (15,11,"#FFFF00"), (15,12,"#FFFF00"), (16,10,"#FFFF00"), (16,11,"#FFFF00"), (16,12,"#FFFF00"), (17,10,"#FFFF00"), (17,11,"#FFFF00"), (17,12,"#FFFF00"), (18,10,"#FFFF00"), (18,11,"#FFFF00"), (18,12,"#FFFF00"), (19,10,"#FFFF00"), (19,11,"#FFFF00"), (19,12,"#FFFF00"), (20,10,"#FFFF00"), (20,11,"#FFFF00"), (20,12,"#FFFF00"), (21,10,"#FFFF00"), (21,11,"#FFFF00"), (21,12,"#FFFF00"), (22,10,"#FFFF00"), (22,11,"#FFFF00"), (22,12,"#FFFF00"), (23,11,"#FFFF00")]
+charRedPlus = [(0,11,"#FF0000"), (1,10,"#FF0000"), (1,11,"#FF0000"), (1,12,"#FF0000"), (2,10,"#FF0000"), (2,11,"#FF0000"), (2,12,"#FF0000"), (3,10,"#FF0000"), (3,11,"#FF0000"), (3,12,"#FF0000"), (4,10,"#FF0000"), (4,11,"#FF0000"), (4,12,"#FF0000"), (5,10,"#FF0000"), (5,11,"#FF0000"), (5,12,"#FF0000"), (6,10,"#FF0000"), (6,11,"#FF0000"), (6,12,"#FF0000"), (7,10,"#FF0000"), (7,11,"#FF0000"), (7,12,"#FF0000"), (8,10,"#FF0000"), (8,11,"#FF0000"), (8,12,"#FF0000"), (9,10,"#FF0000"), (9,11,"#FF0000"), (9,12,"#FF0000"), (10,1,"#FF0000"), (10,2,"#FF0000"), (10,3,"#FF0000"), (10,4,"#FF0000"), (10,5,"#FF0000"), (10,6,"#FF0000"), (10,7,"#FF0000"), (10,8,"#FF0000"), (10,9,"#FF0000"), (10,10,"#FF0000"), (10,11,"#FF0000"), (10,12,"#FF0000"), (10,13,"#FF0000"), (10,14,"#FF0000"), (10,15,"#FF0000"), (10,16,"#FF0000"), (10,17,"#FF0000"), (10,18,"#FF0000"), (10,19,"#FF0000"), (10,20,"#FF0000"), (10,21,"#FF0000"), (10,22,"#FF0000"), (11,0,"#FF0000"), (11,1,"#FF0000"), (11,2,"#FF0000"), (11,3,"#FF0000"), (11,4,"#FF0000"), (11,5,"#FF0000"), (11,6,"#FF0000"), (11,7,"#FF0000"), (11,8,"#FF0000"), (11,9,"#FF0000"), (11,10,"#FF0000"), (11,11,"#FF0000"), (11,12,"#FF0000"), (11,13,"#FF0000"), (11,14,"#FF0000"), (11,15,"#FF0000"), (11,16,"#FF0000"), (11,17,"#FF0000"), (11,18,"#FF0000"), (11,19,"#FF0000"), (11,20,"#FF0000"), (11,21,"#FF0000"), (11,22,"#FF0000"), (11,23,"#FF0000"), (12,1,"#FF0000"), (12,2,"#FF0000"), (12,3,"#FF0000"), (12,4,"#FF0000"), (12,5,"#FF0000"), (12,6,"#FF0000"), (12,7,"#FF0000"), (12,8,"#FF0000"), (12,9,"#FF0000"), (12,10,"#FF0000"), (12,11,"#FF0000"), (12,12,"#FF0000"), (12,13,"#FF0000"), (12,14,"#FF0000"), (12,15,"#FF0000"), (12,16,"#FF0000"), (12,17,"#FF0000"), (12,18,"#FF0000"), (12,19,"#FF0000"), (12,20,"#FF0000"), (12,21,"#FF0000"), (12,22,"#FF0000"), (13,10,"#FF0000"), (13,11,"#FF0000"), (13,12,"#FF0000"), (14,10,"#FF0000"), (14,11,"#FF0000"), (14,12,"#FF0000"), (15,10,"#FF0000"), (15,11,"#FF0000"), (15,12,"#FF0000"), (16,10,"#FF0000"), (16,11,"#FF0000"), (16,12,"#FF0000"), (17,10,"#FF0000"), (17,11,"#FF0000"), (17,12,"#FF0000"), (18,10,"#FF0000"), (18,11,"#FF0000"), (18,12,"#FF0000"), (19,10,"#FF0000"), (19,11,"#FF0000"), (19,12,"#FF0000"), (20,10,"#FF0000"), (20,11,"#FF0000"), (20,12,"#FF0000"), (21,10,"#FF0000"), (21,11,"#FF0000"), (21,12,"#FF0000"), (22,10,"#FF0000"), (22,11,"#FF0000"), (22,12,"#FF0000"), (23,11,"#FF0000")]
+
 
 charMath3 = [(1,3,"#FFFF00"), (1,4,"#FFFF00"), (1,5,"#FFFF00"), (1,15,"#FFFF00"), (1,16,"#FFFF00"), (1,17,"#FFFF00"), (2,2,"#FFFF00"), (2,3,"#FFFF00"), (2,4,"#FFFF00"), (2,5,"#FFFF00"), (2,15,"#FFFF00"), (2,16,"#FFFF00"), (2,17,"#FFFF00"), (2,18,"#FFFF00"), (3,1,"#FFFF00"), (3,2,"#FFFF00"), (3,3,"#FFFF00"), (3,4,"#FFFF00"), (3,5,"#FFFF00"), (3,15,"#FFFF00"), (3,16,"#FFFF00"), (3,17,"#FFFF00"), (3,18,"#FFFF00"), (3,19,"#FFFF00"), (4,0,"#FFFF00"), (4,1,"#FFFF00"), (4,2,"#FFFF00"), (4,3,"#FFFF00"), (4,4,"#FFFF00"), (4,5,"#FFFF00"), (4,15,"#FFFF00"), (4,16,"#FFFF00"), (4,17,"#FFFF00"), (4,18,"#FFFF00"), (4,19,"#FFFF00"), (4,20,"#FFFF00"), (5,0,"#FFFF00"), (5,1,"#FFFF00"), (5,2,"#FFFF00"), (5,3,"#FFFF00"), (5,4,"#FFFF00"), (5,16,"#FFFF00"), (5,17,"#FFFF00"), (5,18,"#FFFF00"), (5,19,"#FFFF00"), (5,20,"#FFFF00"), (6,0,"#FFFF00"), (6,1,"#FFFF00"), (6,2,"#FFFF00"), (6,10,"#FFFF00"), (6,18,"#FFFF00"), (6,19,"#FFFF00"), (6,20,"#FFFF00"), (7,0,"#FFFF00"), (7,1,"#FFFF00"), (7,2,"#FFFF00"), (7,9,"#FFFF00"), (7,10,"#FFFF00"), (7,11,"#FFFF00"), (7,18,"#FFFF00"), (7,19,"#FFFF00"), (7,20,"#FFFF00"), (8,0,"#FFFF00"), (8,1,"#FFFF00"), (8,2,"#FFFF00"), (8,9,"#FFFF00"), (8,10,"#FFFF00"), (8,11,"#FFFF00"), (8,18,"#FFFF00"), (8,19,"#FFFF00"), (8,20,"#FFFF00"), (9,0,"#FFFF00"), (9,1,"#FFFF00"), (9,2,"#FFFF00"), (9,9,"#FFFF00"), (9,10,"#FFFF00"), (9,11,"#FFFF00"), (9,18,"#FFFF00"), (9,19,"#FFFF00"), (9,20,"#FFFF00"), (10,0,"#FFFF00"), (10,1,"#FFFF00"), (10,2,"#FFFF00"), (10,9,"#FFFF00"), (10,10,"#FFFF00"), (10,11,"#FFFF00"), (10,18,"#FFFF00"), (10,19,"#FFFF00"), (10,20,"#FFFF00"), (11,0,"#FFFF00"), (11,1,"#FFFF00"), (11,2,"#FFFF00"), (11,9,"#FFFF00"), (11,10,"#FFFF00"), (11,11,"#FFFF00"), (11,18,"#FFFF00"), (11,19,"#FFFF00"), (11,20,"#FFFF00"), (12,0,"#FFFF00"), (12,1,"#FFFF00"), (12,2,"#FFFF00"), (12,9,"#FFFF00"), (12,10,"#FFFF00"), (12,11,"#FFFF00"), (12,18,"#FFFF00"), (12,19,"#FFFF00"), (12,20,"#FFFF00"), (13,0,"#FFFF00"), (13,1,"#FFFF00"), (13,2,"#FFFF00"), (13,9,"#FFFF00"), (13,10,"#FFFF00"), (13,11,"#FFFF00"), (13,18,"#FFFF00"), (13,19,"#FFFF00"), (13,20,"#FFFF00"), (14,0,"#FFFF00"), (14,1,"#FFFF00"), (14,2,"#FFFF00"), (14,3,"#FFFF00"), (14,9,"#FFFF00"), (14,10,"#FFFF00"), (14,11,"#FFFF00"), (14,17,"#FFFF00"), (14,18,"#FFFF00"), (14,19,"#FFFF00"), (14,20,"#FFFF00"), (15,0,"#FFFF00"), (15,1,"#FFFF00"), (15,2,"#FFFF00"), (15,3,"#FFFF00"), (15,4,"#FFFF00"), (15,5,"#FFFF00"), (15,6,"#FFFF00"), (15,7,"#FFFF00"), (15,8,"#FFFF00"), (15,9,"#FFFF00"), (15,10,"#FFFF00"), (15,11,"#FFFF00"), (15,12,"#FFFF00"), (15,13,"#FFFF00"), (15,14,"#FFFF00"), (15,15,"#FFFF00"), (15,16,"#FFFF00"), (15,17,"#FFFF00"), (15,18,"#FFFF00"), (15,19,"#FFFF00"), (15,20,"#FFFF00"), (16,0,"#FFFF00"), (16,1,"#FFFF00"), (16,2,"#FFFF00"), (16,3,"#FFFF00"), (16,4,"#FFFF00"), (16,5,"#FFFF00"), (16,6,"#FFFF00"), (16,7,"#FFFF00"), (16,8,"#FFFF00"), (16,9,"#FFFF00"), (16,10,"#FFFF00"), (16,11,"#FFFF00"), (16,12,"#FFFF00"), (16,13,"#FFFF00"), (16,14,"#FFFF00"), (16,15,"#FFFF00"), (16,16,"#FFFF00"), (16,17,"#FFFF00"), (16,18,"#FFFF00"), (16,19,"#FFFF00"), (16,20,"#FFFF00"), (17,0,"#FFFF00"), (17,1,"#FFFF00"), (17,2,"#FFFF00"), (17,3,"#FFFF00"), (17,4,"#FFFF00"), (17,5,"#FFFF00"), (17,6,"#FFFF00"), (17,7,"#FFFF00"), (17,8,"#FFFF00"), (17,9,"#FFFF00"), (17,10,"#FFFF00"), (17,11,"#FFFF00"), (17,12,"#FFFF00"), (17,13,"#FFFF00"), (17,14,"#FFFF00"), (17,15,"#FFFF00"), (17,16,"#FFFF00"), (17,17,"#FFFF00"), (17,18,"#FFFF00"), (17,19,"#FFFF00"), (17,20,"#FFFF00"), (18,1,"#FFFF00"), (18,2,"#FFFF00"), (18,3,"#FFFF00"), (18,4,"#FFFF00"), (18,5,"#FFFF00"), (18,6,"#FFFF00"), (18,7,"#FFFF00"), (18,8,"#FFFF00"), (18,12,"#FFFF00"), (18,13,"#FFFF00"), (18,14,"#FFFF00"), (18,15,"#FFFF00"), (18,16,"#FFFF00"), (18,17,"#FFFF00"), (18,18,"#FFFF00"), (18,19,"#FFFF00"), (19,2,"#FFFF00"), (19,3,"#FFFF00"), (19,4,"#FFFF00"), (19,5,"#FFFF00"), (19,6,"#FFFF00"), (19,7,"#FFFF00"), (19,8,"#FFFF00"), (19,12,"#FFFF00"), (19,13,"#FFFF00"), (19,14,"#FFFF00"), (19,15,"#FFFF00"), (19,16,"#FFFF00"), (19,17,"#FFFF00"), (19,18,"#FFFF00"), (20,3,"#FFFF00"), (20,4,"#FFFF00"), (20,5,"#FFFF00"), (20,6,"#FFFF00"), (20,7,"#FFFF00"), (20,13,"#FFFF00"), (20,14,"#FFFF00"), (20,15,"#FFFF00"), (20,16,"#FFFF00"), (20,17,"#FFFF00")]
 
@@ -62,13 +74,14 @@ LEVELSTART = 1   # change with start keys 1,2,3,...,9
 popiscletype  = 1
 strawberrytype = 2
 plustype = 4
+plusredtype = 5
 threetype = 3
 
 walls0 = {(0,3),(1,3),(2,3),(3,3),(4,3),(5,3),(6,3),(7,3),(9,3),(8,3),(10,3),(11,3),(12,3),(13,3),(14,3),(15,3),(16,3),(17,3),(18,3),(19,3),(20,3),(21,3),(22,3),(23,3),(0,8),(1,8),(2,8),(3,8),(4,8),(5,8),(5,8),(6,8),(7,8),(8,8),(9,8),(10,8),(11,8),(12,8),(13,8),(14,8),(15,8),(16,8),(17,8),(18,8),(19,8),(20,8),(21,8),(22,8),(23,8)}
 pointsset0 = {(5,5,1),(5,6,1),(7,5,1),(7,6,1),(9,5,1),(9,6,1),(11,5,1),(11,6,1),(13,5,2),(13,6,2),(15,5,2),(15,6,2)}
 
 walls1 = {(7,1),(7,2),(7,9),(7,10),(17,2),(16,2),(15,2),(14,2),(13,2),(12,2),(11,2),(11,3),(12,4),(13,5),(15,6),(14,6),(14,7),(13,7),(12,8),(11,9),(11,10),(12,10),(13,10),(14,10),(15,10),(16,10),(17,10)}
-pointsset1 = {(4,0,3),(5,0,4),(6,0,3),(7,0,4),(8,0,3),(9,0,4),(10,0,3),(5,8,1),(7,6,1),(21,8,1),(21,4,1),(2,12,1),(4,4,1),(4,10,1),(21,11,1)}
+pointsset1 = {(10,10,5),(15,12,4),(4,0,3),(5,0,5),(6,0,3),(7,0,4),(8,0,3),(9,0,4),(10,0,3),(5,8,1),(7,6,1),(21,8,1),(21,4,1),(2,12,1),(4,4,1),(4,10,1),(21,11,1)}
 
 
 wallslist = [walls0, walls1]
@@ -81,6 +94,7 @@ pointsset = pointslist[LEVELSTART]
 score = 0
 
 mathstring = "1+(2A+3B+4I)*4XY"
+mathstring = "1+(2+3)"
 
 ShowAllCollisions = False
 
@@ -131,6 +145,11 @@ def createplayfield():
            fruitlist.append(fruit)
        if stype == plustype:
            fruit = LEDlib.LEDobj(canvas1,x*wallsize+8,y*wallsize+DOWNOFFSET,dx = 0,dy = 0,CharPoints=charPlus, pixelsize = 1,typestring = "fruit")
+           fruit.collisionrect = (0,6,22,30)
+           fruit.PointsType = 200
+           fruitlist.append(fruit)
+       if stype == plusredtype:
+           fruit = LEDlib.LEDobj(canvas1,x*wallsize+8,y*wallsize+DOWNOFFSET,dx = 0,dy = 0,CharPoints=charRedPlus, pixelsize = 1,typestring = "fruit")
            fruit.collisionrect = (0,6,22,30)
            fruit.PointsType = 200
            fruitlist.append(fruit)
@@ -204,7 +223,7 @@ myBIG3 = LEDlib.LEDobj(canvas1,x=100,y=210,dx = 0,dy = 0,CharPoints=charMath3, p
 displayscore = LEDlib.LEDscoreobj(canvas1,x=210,y=10,score=0,colour="white",pixelsize=3, charwidth = 24,numzeros=5)
 displaytextscore = LEDlib.LEDtextobj(canvas1,x=235,y=35,text="SCORE",colour="yellow",pixelsize = 2, charwidth=14, solid = True)
 
-displaymath = LEDlib.LEDtextobj(canvas1,x=300,y=50,text=mathstring,colour="light green",pixelsize = 4, charwidth=32)
+displaymath = LEDlib.LEDtextobj(canvas1,x=170,y=60,text=mathstring,colour="light green",pixelsize = 4, charwidth=32, multicolour=True)
 
 createplayfield()
 gameloop()
