@@ -13,17 +13,14 @@ current_script_directory = os.path.dirname(os.path.abspath(__file__))
 os.chdir(current_script_directory)
 
 # TODO
+# make displaymath1,2 = ? initially and then update
+# have fruit bonuses (max 100) to have some "7Seconds" strategy
 # levels 1 to 10 have lots of simple instructions.
 # ->> Real BODMAS/ALGEBRA starts at level 11 
 # look at Algebra Tutorial 1
 # plut +- signs in stationary bubbles, like bubble bobble.
 # collecting things (numbers, fruit) is fun
-# use coloured +,-,*,/ signs randomly spread over screen to determine which +,-,*,/ gets executed
-# incorrect answer stalls (1+(2+3)) LHS stalls execution  ... start again to get full score + time score
-# OR simply do not pick up incorrect items until they are ready
-# once + is collected, highlight 2+3 in a box. Then need to collect 5 to proceed. This is better
 # GOAL: get highest possible score
-# Answer box in middle of screen
 # build tools for LHS (level editor, etc)
 # make a level inside a giant 3
 # collect A, B, etc to evaluate A, B ,etc
@@ -32,8 +29,6 @@ os.chdir(current_script_directory)
 # add math animation in background for each symbol of walls
 #       Same activity for 100 levels would be boring
 #       -> Need new activities for Maths
-# leave Math comments at end of each game
-# BODMAS level: Use car to choose  * or + (with e.g. 2+3*7) 
 # Mention this is easier to read than the equivalent 2+(3*7), and esp. expressions like 1+(1+(1+1)) 
 # Show how to evaluate nested brackets : 3*(1+(2/3))  read first ) then go left to first (
 # distributive law a*(b+c) = a*b + a*c to simplify
@@ -41,9 +36,12 @@ os.chdir(current_script_directory)
 # score is increased per remaining time
 # each level solves an equation. Show animation. Drive over steps in correct order, o/w fail.
 # create lots of libraries to shorten code
-# design levels that remove blocks after "+"" is collected so that all collections are automatically in order
-#  i.e. enclose second "+"" completely in blocks
+# design levels that remove blocks after "+" is collected so that all collections are automatically in order
+#  i.e. enclose second "+" completely in blocks
 # first try succesful bonus score
+# help student memorise formulas/methods
+# did you know? at end of each section
+# have fuel/ pick up fuel? Go slow if run out of fuel
 
 # execute CPU instructions to run program?
 
@@ -80,29 +78,34 @@ threetype = 3
 walls0 = {(0,3),(1,3),(2,3),(3,3),(4,3),(5,3),(6,3),(7,3),(9,3),(8,3),(10,3),(11,3),(12,3),(13,3),(14,3),(15,3),(16,3),(17,3),(18,3),(19,3),(20,3),(21,3),(22,3),(23,3),(0,8),(1,8),(2,8),(3,8),(4,8),(5,8),(5,8),(6,8),(7,8),(8,8),(9,8),(10,8),(11,8),(12,8),(13,8),(14,8),(15,8),(16,8),(17,8),(18,8),(19,8),(20,8),(21,8),(22,8),(23,8)}
 pointsset0 = {(5,5,1),(5,6,1),(7,5,1),(7,6,1),(9,5,1),(9,6,1),(11,5,1),(11,6,1),(13,5,2),(13,6,2),(15,5,2),(15,6,2)}
 
-walls1 = {(7,1),(7,2),(7,9),(7,10),(17,2),(16,2),(15,2),(14,2),(13,2),(12,2),(11,2),(11,3),(12,4),(13,5),(15,6),(14,6),(14,7),(13,7),(12,8),(11,9),(11,10),(12,10),(13,10),(14,10),(15,10),(16,10),(17,10)}
-pointsset1 = {(10,10,5),(15,12,4),(4,0,3)}
+walls1 = {(7,9),(7,10),(11,3),(12,4),(13,5),(15,6),(14,6),(14,7),(13,7),(12,8),(11,9),(11,10),(12,10),(13,10),(14,10),(15,10),(16,10),(17,10)}
+pointsset1 = {(2,10,5),(15,12,4),(4,0,3)}
 
 
 wallslist = [walls0, walls1]
 pointslist = [pointsset0, pointsset1]
 maxlist = [2100,5000,5000,5000,5000,5000,5000,5000,5000,5000] # max score for levels 0, ...
 
+
+mathstring = "1+(2A+3B+4I)*4XY"
+mathstring = "1+(2+3)"
 # 1+(2+3)
 stack = ["(2+3)","5","1+5","6"]
+FirstEval = stack[0]
+SecondEval = stack[2]
 
 walls = wallslist[LEVELSTART]
 pointsset = pointslist[LEVELSTART]
 
 score = 0
-
-mathstring = "1+(2A+3B+4I)*4XY"
-mathstring = "1+(2+3)"
+bonus = 1000  # decrease 100 per second
 
 ShowAllCollisions = False
 
 HitWall = False
 PlayerAlive = False
+GameRunning = False
+GameComplete = False
 
 highscore = 0
 
@@ -147,12 +150,12 @@ def createplayfield():
            fruit.PointsType = 200
            fruitlist.append(fruit)
        if stype == plustype:
-           fruit = LEDlib.LEDobj(canvas1,x*wallsize+8,y*wallsize+DOWNOFFSET,dx = 0,dy = 0,CharPoints=charPlus, pixelsize = 1,typestring = stack[0])
+           fruit = LEDlib.LEDobj(canvas1,x*wallsize+8,y*wallsize+DOWNOFFSET,dx = 0,dy = 0,CharPoints=charPlus, pixelsize = 1,typestring = FirstEval)
            fruit.collisionrect = (0,6,22,30)
            fruit.PointsType = 200
            fruitlist.append(fruit)
        if stype == plusredtype:
-           fruit = LEDlib.LEDobj(canvas1,x*wallsize+8,y*wallsize+DOWNOFFSET,dx = 0,dy = 0,CharPoints=charRedPlus, pixelsize = 1,typestring = "fruit")
+           fruit = LEDlib.LEDobj(canvas1,x*wallsize+8,y*wallsize+DOWNOFFSET,dx = 0,dy = 0,CharPoints=charRedPlus, pixelsize = 1,typestring = SecondEval)
            fruit.collisionrect = (0,6,22,30)
            fruit.PointsType = 200
            fruitlist.append(fruit)
@@ -163,7 +166,10 @@ def createplayfield():
            #fruitlist.append(fruit) # do not collect
 
 def mykey(event):
-    global HitWall, PlayerAlive, starttime,score, highscore,walls,pointsset, LEVELSTART, counttime
+    global HitWall, PlayerAlive, starttime,score, highscore,walls,pointsset, LEVELSTART, counttime, GameRunning, GameComplete
+    if not GameRunning and not GameComplete: # start game when user presses a key
+           GameRunning  = True
+           updatebonus()       
     key = event.keysym
     if HitWall:
          HitWall = False
@@ -184,24 +190,50 @@ def mykey(event):
          myship.dy = STEPD
          myship.dx = 0
 
+
+def updatebonus():
+    global bonus, GameRunning
+    if GameRunning:
+      bonus = bonus - 10
+      if bonus < 0: bonus = 0
+      displaybonus.update(bonus)
+      mainwin.after(200,updatebonus)
      
 def gameloop():
-    global HitWall, score, highscore, mathstring 
+    global HitWall, score, highscore, mathstring, FirstEval, GameRunning, GameComplete
     if LEVELSTART == 0: myship.dx = 2
     if PlayerAlive or LEVELSTART == 0: myship.move()
     for fruit in fruitlist:
        if checkcollisionrect(myship,fruit):
-            if fruit.typestring == stack[0]:
+            if fruit.typestring == FirstEval:
                print(fruit.typestring)
                mathstring =  mathstring.replace(stack[0],stack[1])
                stack.pop(0)
+               stack.pop(0)
                print(stack)
                displaymath2 = LEDlib.LEDtextobj(canvas1,x=210,y=98,text="="+mathstring,colour="light green",pixelsize = 4, charwidth=32, multicolour=True, plusorder = ["red"])
-
                print(mathstring)
-            fruit.undraw()
-            fruitlist.remove(fruit)
-            score = score + fruit.PointsType
+               FirstEval = ""
+               fruit.undraw()
+               fruitlist.remove(fruit)
+               score = score + fruit.PointsType
+            if fruit.typestring == SecondEval: 
+               if FirstEval == "":
+                  mathstring =  mathstring.replace(stack[0],stack[1])
+                  stack.pop(0)
+                  stack.pop(0)
+                  displaymath3 = LEDlib.LEDtextobj(canvas1,x=210,y=135,text="="+mathstring,colour="light green",pixelsize = 4, charwidth=32, multicolour=True, plusorder = ["red"])
+                  fruit.undraw()
+                  fruitlist.remove(fruit)
+                  score = score + fruit.PointsType
+                  score = score + bonus
+                  GameRunning = False
+                  GameComplete = True
+               else:
+                  myship.dx = -myship.dx
+                  myship.dy = -myship.dy
+                  HitWall = True  
+                  print("Incorrect")  
             if score > highscore: 
                 highscore = score
             displayscore.update(score)
@@ -234,10 +266,19 @@ myBIG3 = LEDlib.LEDobj(canvas1,x=100,y=210,dx = 0,dy = 0,CharPoints=charMath3, p
 displayscore = LEDlib.LEDscoreobj(canvas1,x=210,y=10,score=0,colour="white",pixelsize=3, charwidth = 24,numzeros=5)
 displaytextscore = LEDlib.LEDtextobj(canvas1,x=235,y=35,text="SCORE",colour="yellow",pixelsize = 2, charwidth=14, solid = True)
 
+displaybonus = LEDlib.LEDscoreobj(canvas1,x=410,y=10,score=bonus,colour="white",pixelsize=3, charwidth = 24,numzeros=5)
+displaytextscore = LEDlib.LEDtextobj(canvas1,x=435,y=35,text="BONUS",colour="yellow",pixelsize = 2, charwidth=14, solid = True)
+
+
 displaymath = LEDlib.LEDtextobj(canvas1,x=240,y=60,text=mathstring,colour="light green",pixelsize = 4, charwidth=32, multicolour=True, plusorder = ["red","yellow"])
+# displaymath2 = 
+# displaymath3 = 
+
 
 createplayfield()
 gameloop()
+# updatebonus() gets called in mkey
+
 PlayerAlive = True
 
 mainwin.bind("<KeyPress>", mykey)
