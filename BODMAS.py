@@ -42,6 +42,8 @@ os.chdir(current_script_directory)
 # help student memorise formulas/methods
 # did you know? at end of each section
 # have fuel/ pick up fuel? Go slow if run out of fuel
+# use bejeweled style sounds for "good", "mission complete", etc
+# have full instructions on screen at all times for new users
 
 # execute CPU instructions to run program?
 
@@ -106,6 +108,7 @@ HitWall = False
 PlayerAlive = False
 GameRunning = False
 GameComplete = False
+Stopping = False
 
 highscore = 0
 
@@ -166,10 +169,11 @@ def createplayfield():
            #fruitlist.append(fruit) # do not collect
 
 def mykey(event):
-    global HitWall, PlayerAlive, starttime,score, highscore,walls,pointsset, LEVELSTART, counttime, GameRunning, GameComplete
+    global HitWall, PlayerAlive, starttime,score, highscore,walls,pointsset, LEVELSTART, counttime, GameRunning, GameComplete, Stopping
     if not GameRunning and not GameComplete: # start game when user presses a key
            GameRunning  = True
-           updatebonus()       
+           updatebonus()
+    if Stopping: return        
     key = event.keysym
     if HitWall:
          HitWall = False
@@ -199,8 +203,15 @@ def updatebonus():
       displaybonus.update(bonus)
       mainwin.after(200,updatebonus)
      
+
+def slowstop():
+    global Stopping
+    Stopping = False
+    myship.dx = 0
+    myship.dy = 0
+
 def gameloop():
-    global HitWall, score, highscore, mathstring, FirstEval, GameRunning, GameComplete
+    global HitWall, score, highscore, mathstring, FirstEval, GameRunning, GameComplete, Stopping
     if LEVELSTART == 0: myship.dx = 2
     if PlayerAlive or LEVELSTART == 0: myship.move()
     for fruit in fruitlist:
@@ -208,11 +219,14 @@ def gameloop():
             if fruit.typestring == FirstEval:
                print(fruit.typestring)
                mathstring =  mathstring.replace(stack[0],stack[1])
+               displaystring = FirstEval+"="+stack[1]
                stack.pop(0)
                stack.pop(0)
                print(stack)
                displaymath2 = LEDlib.LEDtextobj(canvas1,x=210,y=98,text="="+mathstring,colour="light green",pixelsize = 4, charwidth=32, multicolour=True, plusorder = ["red"])
+               LEDlib.LEDtextobj(canvas1,x=fruit.x,y=fruit.y,text=displaystring,colour="light green",pixelsize = 4, charwidth=32, multicolour=True, plusorder = ["yellow"])
                print(mathstring)
+
                FirstEval = ""
                fruit.undraw()
                fruitlist.remove(fruit)
@@ -220,9 +234,12 @@ def gameloop():
             if fruit.typestring == SecondEval: 
                if FirstEval == "":
                   mathstring =  mathstring.replace(stack[0],stack[1])
+                  displaystring = SecondEval+"="+stack[1]
                   stack.pop(0)
                   stack.pop(0)
                   displaymath3 = LEDlib.LEDtextobj(canvas1,x=210,y=135,text="="+mathstring,colour="light green",pixelsize = 4, charwidth=32, multicolour=True, plusorder = ["red"])
+                  LEDlib.LEDtextobj(canvas1,x=fruit.x,y=fruit.y,text=displaystring,colour="light green",pixelsize = 4, charwidth=32, multicolour=True, plusorder = ["red"])
+
                   fruit.undraw()
                   fruitlist.remove(fruit)
                   score = score + fruit.PointsType
@@ -233,7 +250,9 @@ def gameloop():
                   myship.dx = -myship.dx
                   myship.dy = -myship.dy
                   HitWall = True  
-                  print("Incorrect")  
+                  print("Incorrect") 
+                  Stopping = True
+                  mainwin.after(100,slowstop) 
             if score > highscore: 
                 highscore = score
             displayscore.update(score)
