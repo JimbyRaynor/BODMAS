@@ -13,7 +13,6 @@ current_script_directory = os.path.dirname(os.path.abspath(__file__))
 os.chdir(current_script_directory)
 
 # TODO
-# make displaymath1,2 = ? initially and then update
 # have fruit bonuses (max 100) to have some "7Seconds" strategy
 # levels 1 to 10 have lots of simple instructions.
 # ->> Real BODMAS/ALGEBRA starts at level 11 
@@ -32,6 +31,9 @@ os.chdir(current_script_directory)
 # Mention this is easier to read than the equivalent 2+(3*7), and esp. expressions like 1+(1+(1+1)) 
 # Show how to evaluate nested brackets : 3*(1+(2/3))  read first ) then go left to first (
 # distributive law a*(b+c) = a*b + a*c to simplify
+# notice that distributive law depends on BODMAS. So do examples of all axioms
+# can have levels with 2 expressions: 3*(7+9) and 3*7 + 3*9 with *(red), +(red), *(yellow), *(green), +(yellow)
+# -1^2 = 1 (from Copilot, since BODMAS O says do exponentials first)
 # have fruit pickups to increase score
 # score is increased per remaining time
 # each level solves an equation. Show animation. Drive over steps in correct order, o/w fail.
@@ -223,7 +225,7 @@ def gameloop():
                stack.pop(0)
                stack.pop(0)
                print(stack)
-               displaymath2 = LEDlib.LEDtextobj(canvas1,x=210,y=98,text="="+mathstring,colour="light green",pixelsize = 4, charwidth=32, multicolour=True, plusorder = ["red"])
+               displaymath2.update("="+mathstring)
                LEDlib.LEDtextobj(canvas1,x=fruit.x,y=fruit.y,text=displaystring,colour="light green",pixelsize = 4, charwidth=32, multicolour=True, plusorder = ["yellow"])
                print(mathstring)
 
@@ -237,7 +239,7 @@ def gameloop():
                   displaystring = SecondEval+"="+stack[1]
                   stack.pop(0)
                   stack.pop(0)
-                  displaymath3 = LEDlib.LEDtextobj(canvas1,x=210,y=135,text="="+mathstring,colour="light green",pixelsize = 4, charwidth=32, multicolour=True, plusorder = ["red"])
+                  displaymath3.update("="+mathstring)
                   LEDlib.LEDtextobj(canvas1,x=fruit.x,y=fruit.y,text=displaystring,colour="light green",pixelsize = 4, charwidth=32, multicolour=True, plusorder = ["red"])
 
                   fruit.undraw()
@@ -290,8 +292,8 @@ displaytextscore = LEDlib.LEDtextobj(canvas1,x=435,y=35,text="BONUS",colour="yel
 
 
 displaymath = LEDlib.LEDtextobj(canvas1,x=240,y=60,text=mathstring,colour="light green",pixelsize = 4, charwidth=32, multicolour=True, plusorder = ["red","yellow"])
-# displaymath2 = 
-# displaymath3 = 
+displaymath2 = LEDlib.LEDtextobj(canvas1,x=210,y=98,text="= ?",colour="light green",pixelsize = 4, charwidth=32, multicolour=True, plusorder = ["red"])
+displaymath3 = LEDlib.LEDtextobj(canvas1,x=210,y=135,text="= ?",colour="light green",pixelsize = 4, charwidth=32, multicolour=True, plusorder = ["red"])
 
 
 createplayfield()
