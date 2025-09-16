@@ -290,17 +290,34 @@ global.charQ = [
     [6,7],[7,7]
 ];
 
-function ColourChar(xloc, yloc, coord_array, mycolor,charsize) {
+function ColourChar(xloc, yloc, coord_array, mycolor,charsize,solid) {
     for (var i = 0; i < array_length(coord_array); i++) {
         var xs = xloc+coord_array[i][0] * charsize;
         var ys = yloc+ coord_array[i][1] * charsize;
-        draw_set_color(mycolor);
+		draw_set_color(c_black);
+		//draw_rectangle(xs, ys, xs + charsize, ys + charsize, false);	
+		draw_set_color(mycolor);
+		if (solid == true)
+		{
         draw_rectangle(xs, ys, xs + charsize, ys + charsize, false);
+		}
+		else
+		{
+		 //draw_rectangle(xs+1, ys+1, xs + charsize-1, ys + charsize-1, true);
+	
+		 draw_point(xs+1,ys)
+		 if (charsize > 2)
+		 {
+		  draw_point(xs+1,ys-1)
+		   draw_point(xs+2,ys)
+		  draw_point(xs+2,ys-1)
+		 }
+		}
     }
 }
 
 
-function ColourText(xloc, ys, mytext, colour, charwidth,charsize)
+function ColourText(xloc, ys, mytext, colour, charwidth,charsize,solid)
 {
     var digits = [global.ZERO, global.ONE, global.TWO, global.THREE, global.FOUR, global.FIVE, global.SIX, global.SEVEN, global.EIGHT, global.NINE];
     mytext = string_upper(mytext);
@@ -327,25 +344,25 @@ function ColourText(xloc, ys, mytext, colour, charwidth,charsize)
             switch (c) {
                 case "0": case "1": case "2": case "3": case "4":
                 case "5": case "6": case "7": case "8": case "9":
-                    ColourChar( xs, ys, digits[real(c)], colour,charsize);
+                    ColourChar( xs, ys, digits[real(c)], colour,charsize,solid);
                     break;
                 case "%":
-                    ColourChar( xs, ys, charPercent, colour,charsize);
+                    ColourChar( xs, ys, charPercent, colour,charsize,solid);
                     break;
                 case ".":
                     AdjustPos -= 2 * charwidth / 8;
-					ColourChar( xs, ys, charDot, colour,charsize);
+					ColourChar( xs, ys, charDot, colour,charsize,solid);
                     break;
                 case ":":
                     AdjustPos -= 2 * charwidth / 8;
-					ColourChar( xs, ys, charColon, colour,charsize);
+					ColourChar( xs, ys, charColon, colour,charsize,solid);
                     break;
                 case "+":
                    // var newcolour = colour;
                    // if (multicolour && PlusCount < array_length(plusorder)) {
                   //      newcolour = plusorder[PlusCount];
                    // }
-				   ColourChar( xs, ys, PLUS, colour,charsize);
+				   ColourChar( xs, ys, PLUS, colour,charsize,solid);
                     PlusCount += 1;
                     break;
                 case "*":
@@ -366,7 +383,7 @@ function ColourText(xloc, ys, mytext, colour, charwidth,charsize)
                 default:
                     var index = ord(c) - 65;
                     if (index >= 0 && index < array_length(charactermap)) {
-						ColourChar( xs, ys, charactermap[index], colour, charsize);
+						ColourChar( xs, ys, charactermap[index], colour, charsize,solid);
                     }
                     break;
             }
