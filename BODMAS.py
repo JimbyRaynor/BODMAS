@@ -18,7 +18,6 @@ os.chdir(current_script_directory)
 # No an animations moving +,- etc. Does not help. Just leave 2+3=5, etc
 # start with 1+(2+3) = (1+2)+3  associative law. Use "law" so we don't have to call it axiom or theorem
 # talk about bodmas (b) and associative law at the same time
-# add pre and post space for typesetting = char in LEDlib
 # have fruit bonuses (max 100) to have some "7Seconds" strategy
 # level 0 demonstrates collecting red + before yellow +
 # levels 1 to 10 have lots of simple instructions.
@@ -91,7 +90,7 @@ threetype = 3
 walls0 = {(0,3),(1,3),(2,3),(3,3),(4,3),(5,3),(6,3),(7,3),(9,3),(8,3),(10,3),(11,3),(12,3),(13,3),(14,3),(15,3),(16,3),(17,3),(18,3),(19,3),(20,3),(21,3),(22,3),(23,3),(0,8),(1,8),(2,8),(3,8),(4,8),(5,8),(5,8),(6,8),(7,8),(8,8),(9,8),(10,8),(11,8),(12,8),(13,8),(14,8),(15,8),(16,8),(17,8),(18,8),(19,8),(20,8),(21,8),(22,8),(23,8)}
 pointsset0 = {(5,5,1),(5,6,1),(7,5,1),(7,6,1),(9,5,1),(9,6,1),(11,5,1),(11,6,1),(13,5,2),(13,6,2),(15,5,2),(15,6,2)}
 
-pointsset1 = {(13,7,10),(7,8,11),(23,7,9),(19,1,9),(8,6,8),(14,2,8),(10,8,5),(19,6,5)}
+pointsset1 = {(13,7,10),(7,8,11),(23,7,9),(8,6,8),(10,8,5),(19,6,5)}
 
 walls1 = {(3,8),(3,9),(3,10),(3,11),(5,11),(6,11),(4,11),(7,11),(9,11),(8,11),(10,11),(11,11),(12,11),(13,11),(14,11),(16,11),(15,11),(17,11),(18,11),(20,11),(19,11),(21,11),(22,11),(23,11)}
 
@@ -102,16 +101,22 @@ maxlist = [2100,5000,5000,5000,5000,5000,5000,5000,5000,5000] # max score for le
 
 
 mathstring = "1+(2A+3B+4I)*4XY"
-mathstring = "1+(2+3)"
+
 # 1+(2+3)
-stack = ["(2+3)","5","1+5","6"]
-FirstEval = stack[0]
-SecondEval = stack[2]
+mathstring = "1+(2+3)"
+FirstColourOrder = ["red","yellow"]
+SecondColourOrder = ["red"]
+FirstEval = "yellow+"
+SecondEval = "red+"
+
 
 # (1+2)+3
-stack2 = ["(1+2)","3","3+3","6"]
-FirstEval2 = stack[0]
-SecondEval2 = stack[2]
+mathstringB = "(1+2)+3"
+FirstColourOrderB = ["white","purple"]
+SecondColourOrderB = ["purple"]
+FirstEvalB = "white+"
+SecondEvalB = "purple+"
+
 
 walls = wallslist[LEVELSTART]
 pointsset = pointslist[LEVELSTART]
@@ -156,36 +161,39 @@ def makewalls():
         wall.collisionrect = (8,8,40,40)
         solidlist.append(wall) 
 
+def createfruit(x,y,char, typestring):
+    return LEDlib.LEDobj(canvas1,x*wallsize+8,y*wallsize+DOWNOFFSET,dx = 0,dy = 0,CharPoints=char, pixelsize = 4,typestring = typestring)
+
 def createplayfield():
    makewalls()
    for x,y,stype in pointsset:
        if stype == popiscletype:
-           fruit = LEDlib.LEDobj(canvas1,x*wallsize+8,y*wallsize+DOWNOFFSET,dx = 0,dy = 0,CharPoints=charPopsicle, pixelsize = 2,typestring = "fruit")
+           fruit = createfruit(x,y,charPopsicle, typestring = "fruit")
            fruit.collisionrect = (0,0,16,36)
            fruit.PointsType = 100
            fruitlist.append(fruit)
        if stype == strawberrytype:
-           fruit = LEDlib.LEDobj(canvas1,x*wallsize+8,y*wallsize+DOWNOFFSET,dx = 0,dy = 0,CharPoints=charPacmanStrawberry, pixelsize = 2,typestring = "fruit")
+           fruit = createfruit(x,y,charPacmanStrawberry,typestring = "fruit")
            fruit.collisionrect = (0,6,22,30)
            fruit.PointsType = 200
            fruitlist.append(fruit)
        if stype == plusyellowtype:
-           fruit = LEDlib.LEDobj(canvas1,x*wallsize+8,y*wallsize+DOWNOFFSET,dx = 0,dy = 0,CharPoints=charYellowPlus, pixelsize = 4,typestring = FirstEval)
+           fruit = createfruit(x,y,charYellowPlus, "yellow+")
            fruit.collisionrect =  (24,24,68,68)
            fruit.PointsType = 200
            fruitlist.append(fruit)
        if stype == plusredtype:
-           fruit = LEDlib.LEDobj(canvas1,x*wallsize+8,y*wallsize+DOWNOFFSET,dx = 0,dy = 0,CharPoints=charRedPlus, pixelsize = 4,typestring = SecondEval)
+           fruit = createfruit(x,y,charRedPlus,typestring = "red+")
            fruit.collisionrect = (24,24,68,68)
            fruit.PointsType = 200
            fruitlist.append(fruit)
        if stype == pluswhitetype:
-           fruit = LEDlib.LEDobj(canvas1,x*wallsize+8,y*wallsize+DOWNOFFSET,dx = 0,dy = 0,CharPoints=charWhitePlus, pixelsize = 4,typestring = FirstEval2)
+           fruit = createfruit(x,y,charWhitePlus, typestring = "white+")
            fruit.collisionrect = (24,24,68,68)
            fruit.PointsType = 200
            fruitlist.append(fruit) 
        if stype == pluspurpletype:
-           fruit = LEDlib.LEDobj(canvas1,x*wallsize+8,y*wallsize+DOWNOFFSET,dx = 0,dy = 0,CharPoints=charPurplePlus, pixelsize = 4,typestring = SecondEval2)
+           fruit = createfruit(x,y,charPurplePlus,typestring = "purple+")
            fruit.collisionrect = (24,24,68,68)
            fruit.PointsType = 200
            fruitlist.append(fruit) 
@@ -232,32 +240,34 @@ def slowstop():
     myship.dx = 0
     myship.dy = 0
 
+def bump():
+    global HitWall, Stopping
+    myship.dx = -myship.dx
+    myship.dy = -myship.dy
+    HitWall = True  
+    print("Incorrect") 
+    Stopping = True
+    mainwin.after(100,slowstop) 
+
+
 def gameloop():
     global HitWall, score, highscore, mathstring, FirstEval, GameRunning, GameComplete, Stopping
     if LEVELSTART == 0: myship.dx = 2
     if PlayerAlive or LEVELSTART == 0: myship.move()
     for fruit in fruitlist:
-       if checkcollisionrect(myship,fruit):
-            if fruit.typestring == FirstEval:  # add colour to FirstEval = 2+3 yellow, etc
-               print(fruit.typestring)
-               mathstring =  mathstring.replace(stack[0],stack[1])
-               displaystring = FirstEval+"="+stack[1]
-               stack.pop(0)
-               stack.pop(0)
-               displaymath2.update("="+mathstring)
+       if checkcollisionrect(myship,fruit):   
+            if fruit.typestring == FirstEval:  
+               displaystring = "2+3=5"
+               displaymath2.update("= 1+5")
                LEDlib.LEDtextobj(canvas1,x=fruit.x,y=fruit.y,text=displaystring,colour="light green",pixelsize = 2, charwidth=16, multicolour=True, plusorder = ["yellow"], solid = True)
                FirstEval = ""
-               fruit.move()
                fruit.undraw()
                fruitlist.remove(fruit)
                score = score + fruit.PointsType
-            if fruit.typestring == SecondEval: 
+            elif fruit.typestring == SecondEval: 
                if FirstEval == "":
-                  mathstring =  mathstring.replace(stack[0],stack[1])
-                  displaystring = SecondEval+"="+stack[1]
-                  stack.pop(0)
-                  stack.pop(0)
-                  displaymath3.update("="+mathstring)
+                  displaystring = "1+5=6"
+                  displaymath3.update("= 6")
                   LEDlib.LEDtextobj(canvas1,x=fruit.x,y=fruit.y,text=displaystring,colour="light green",pixelsize = 2, charwidth=16, multicolour=True, plusorder = ["red"], solid = True)
                   fruit.undraw()
                   fruitlist.remove(fruit)
@@ -266,12 +276,9 @@ def gameloop():
                   GameRunning = False
                   GameComplete = True
                else:
-                  myship.dx = -myship.dx
-                  myship.dy = -myship.dy
-                  HitWall = True  
-                  print("Incorrect") 
-                  Stopping = True
-                  mainwin.after(100,slowstop) 
+                   bump()
+            else:
+               bump()
             if score > highscore: 
                 highscore = score
             displayscore.update(score)
@@ -304,9 +311,15 @@ displaybonus = LEDlib.LEDscoreobj(canvas1,x=410,y=10,score=bonus,colour="white",
 displaytextscore = LEDlib.LEDtextobj(canvas1,x=435,y=35,text="BONUS",colour="yellow",pixelsize = 2, charwidth=14, solid = True)
 
 
-displaymath = LEDlib.LEDtextobj(canvas1,x=240,y=60,text=mathstring,colour="light green",pixelsize = 3, charwidth=24, multicolour=True, plusorder = ["red","yellow"], solid = True)
-displaymath2 = LEDlib.LEDtextobj(canvas1,x=210,y=98,text="= ?",colour="light green",pixelsize = 3, charwidth=24, multicolour=True, plusorder = ["red"], solid = True)
-displaymath3 = LEDlib.LEDtextobj(canvas1,x=210,y=135,text="= ?",colour="light green",pixelsize = 3, charwidth=24, multicolour=True, plusorder = ["red"], solid = True)
+displaymath = LEDlib.LEDtextobj(canvas1,x=240,y=60,text=mathstring,colour="light green",pixelsize = 3, charwidth=24, multicolour=True, plusorder = FirstColourOrder, solid = True)
+displaymath2 = LEDlib.LEDtextobj(canvas1,x=193,y=98,text="= ?",colour="light green",pixelsize = 3, charwidth=24, multicolour=True, plusorder = SecondColourOrder, solid = True)
+displaymath3 = LEDlib.LEDtextobj(canvas1,x=193,y=135,text="= ?",colour="light green",pixelsize = 3, charwidth=24, multicolour=True, plusorder = SecondColourOrder, solid = True)
+
+
+displaymathB = LEDlib.LEDtextobj(canvas1,x=440,y=60,text=mathstringB,colour="light green",pixelsize = 3, charwidth=24, multicolour=True, plusorder = FirstColourOrderB, solid = True)
+displaymathB2 = LEDlib.LEDtextobj(canvas1,x=393,y=98,text="= ?",colour="light green",pixelsize = 3, charwidth=24, multicolour=True, plusorder = SecondColourOrderB, solid = True)
+displaymathB3 = LEDlib.LEDtextobj(canvas1,x=393,y=135,text="= ?",colour="light green",pixelsize = 3, charwidth=24, multicolour=True, plusorder = SecondColourOrderB, solid = True)
+
 
 
 createplayfield()
