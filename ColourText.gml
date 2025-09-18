@@ -1,3 +1,10 @@
+global.screentext = ds_list_create();
+ds_list_add(global.screentext, "Line 1")
+ds_list_add(global.screentext, "Line 2")
+ds_list_add(global.screentext, "Line 3")
+
+ addtext("a new line");
+
 global.ONE = [
     [1,6], [2,1], [2,6], [3,0], [3,1], [3,2], [3,3], [3,4], [3,5], [3,6],
     [4,0], [4,1], [4,2], [4,3], [4,4], [4,5], [4,6], [5,6], [6,6]
@@ -393,5 +400,18 @@ function ColourText(xloc, ys, mytext, colour, charwidth,charsize,solid)
             AdjustPos -= charwidth / 8;
         }
     }
+}
+
+function printscreen()
+{
+	    for (var i = 0; i < ds_list_size(global.screentext); i++) 
+		{
+			ColourText(20,300+i*30,ds_list_find_value(global.screentext, i),#98FB98,26,3,false);
+		}
+}
+
+function addtext(mytext)
+{
+	ds_list_add(global.screentext, mytext);
 }
 
