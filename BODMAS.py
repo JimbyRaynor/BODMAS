@@ -14,7 +14,6 @@ os.chdir(current_script_directory)
 
 # TODO
 # Use/Fix Level Editor
-# fix gameloop for testing multiple collisions, + red, yellow, purple, white
 # No an animations moving +,- etc. Does not help. Just leave 2+3=5, etc
 # start with 1+(2+3) = (1+2)+3  associative law. Use "law" so we don't have to call it axiom or theorem
 # talk about bodmas (b) and associative law at the same time
@@ -49,11 +48,11 @@ os.chdir(current_script_directory)
 # have fuel/ pick up fuel? Go slow if run out of fuel
 # use bejeweled style sounds for "good", "mission complete", etc
 # have full instructions on screen at all times for new users
-# change theme to space, change car to Space Shuttle, sparkly stars in background?
-# ducks. Loose points for running over cute animals.
+# Ducks. Loose points for running over cute animals.
 
 # execute CPU instructions to run program?
 # try to make BONUS hard to get, like pinball
+# change theme to space, change car to Space Shuttle, sparkly stars in background?
 
 charRallyX = [(0,14,"#4C3A23"), (0,15,"#4C3A23"), (0,16,"#4C3A23"), (0,17,"#4C3A23"), (0,18,"#4C3A23"), (0,19,"#4C3A23"), (0,20,"#4C3A23"), (1,13,"#4C3A23"), (1,14,"#4C3A23"), (1,15,"#4C3A23"), (1,16,"#4C3A23"), (1,17,"#4C3A23"), (1,18,"#4C3A23"), (1,19,"#4C3A23"), (1,20,"#4C3A23"), (1,21,"#4C3A23"), (2,2,"#4C3A23"), (2,3,"#4C3A23"), (2,4,"#4C3A23"), (2,5,"#4C3A23"), (2,6,"#4C3A23"), (2,13,"#4C3A23"), (2,14,"#4C3A23"), (2,15,"#4C3A23"), (2,16,"#4C3A23"), (2,17,"#4C3A23"), (2,18,"#4C3A23"), (2,19,"#4C3A23"), (2,20,"#4C3A23"), (2,21,"#4C3A23"), (3,1,"#4C3A23"), (3,2,"#4C3A23"), (3,3,"#4C3A23"), (3,4,"#4C3A23"), (3,5,"#4C3A23"), (3,6,"#4C3A23"), (3,7,"#4C3A23"), (3,13,"#4C3A23"), (3,14,"#4C3A23"), (3,15,"#4C3A23"), (3,16,"#4C3A23"), (3,17,"#4C3A23"), (3,18,"#4C3A23"), (3,19,"#4C3A23"), (3,20,"#4C3A23"), (3,21,"#4C3A23"), (4,1,"#4C3A23"), (4,2,"#4C3A23"), (4,3,"#4C3A23"), (4,4,"#4C3A23"), (4,5,"#4C3A23"), (4,6,"#4C3A23"), (4,7,"#4C3A23"), (4,13,"#4C3A23"), (4,14,"#4C3A23"), (4,15,"#4C3A23"), (4,16,"#4C3A23"), (4,17,"#4C3A23"), (4,18,"#4C3A23"), (4,19,"#4C3A23"), (4,20,"#4C3A23"), (4,21,"#4C3A23"), (5,1,"#4C3A23"), (5,2,"#4C3A23"), (5,3,"#4C3A23"), (5,4,"#4C3A23"), (5,5,"#4C3A23"), (5,6,"#4C3A23"), (5,7,"#4C3A23"), (5,13,"#4C3A23"), (5,14,"#4C3A23"), (5,15,"#4C3A23"), (5,16,"#4C3A23"), (5,17,"#4C3A23"), (5,18,"#4C3A23"), (5,19,"#4C3A23"), (5,20,"#4C3A23"), (5,21,"#4C3A23"), (6,1,"#4C3A23"), (6,2,"#4C3A23"), (6,3,"#4C3A23"), (6,4,"#4C3A23"), (6,5,"#4C3A23"), (6,6,"#4C3A23"), (6,7,"#4C3A23"), (6,14,"#4C3A23"), (6,15,"#4C3A23"), (6,16,"#4C3A23"), (6,17,"#4C3A23"), (6,18,"#4C3A23"), (6,19,"#4C3A23"), (6,20,"#4C3A23"), (7,2,"#4C3A23"), (7,3,"#4C3A23"), (7,4,"#4C3A23"), (7,5,"#4C3A23"), (7,6,"#4C3A23"), (7,17,"#FFA07A"), (8,4,"#FFA07A"), (8,10,"#FFA07A"), (8,11,"#FFA07A"), (8,12,"#FFA07A"), (8,13,"#FFA07A"), (8,14,"#FFA07A"), (8,15,"#FFA07A"), (8,16,"#FFA07A"), (8,17,"#FFA07A"), (8,18,"#FFA07A"), (8,19,"#8B4513"), (8,20,"#8B4513"), (8,21,"#FF0000"), (8,22,"#FFFF00"), (8,23,"#FF0000"), (9,4,"#FFA07A"), (9,8,"#FFA07A"), (9,9,"#FFA07A"), (9,10,"#FFA07A"), (9,11,"#FFA07A"), (9,12,"#FFA07A"), (9,13,"#FFA07A"), (9,14,"#FFA07A"), (9,15,"#FFA07A"), (9,16,"#FFA07A"), (9,17,"#FFA07A"), (9,18,"#FFA07A"), (9,19,"#FFA07A"), (9,20,"#8B4513"), (9,21,"#8B4513"), (9,22,"#FF0000"), (9,23,"#FFFF00"), (10,1,"#FFA07A"), (10,2,"#FFA07A"), (10,3,"#FFA07A"), (10,4,"#FFA07A"), (10,5,"#FFA07A"), (10,6,"#FFA07A"), (10,7,"#FFA07A"), (10,8,"#FFA07A"), (10,9,"#FFA07A"), (10,10,"#FFA07A"), (10,11,"#AAAAAA"), (10,12,"#AAAAAA"), (10,13,"#AAAAAA"), (10,14,"#AAAAAA"), (10,15,"#AAAAAA"), (10,16,"#AAAAAA"), (10,17,"#FFA07A"), (10,18,"#FFA07A"), (10,19,"#FFA07A"), (10,20,"#FFA07A"), (11,0,"#FFA07A"), (11,1,"#FFA07A"), (11,2,"#FFA07A"), (11,3,"#FFA07A"), (11,4,"#FFA07A"), (11,5,"#FFA07A"), (11,6,"#FFA07A"), (11,7,"#FFA07A"), (11,8,"#FFA07A"), (11,9,"#FFA07A"), (11,10,"#AAAAAA"), (11,11,"#B5B3F5"), (11,12,"#FFFFFF"), (11,13,"#FFFFFF"), (11,14,"#FFFFFF"), (11,15,"#FFFFFF"), (11,16,"#B5B3F5"), (11,17,"#AAAAAA"), (11,18,"#FFA07A"), (11,19,"#FFA07A"), (11,20,"#FFA07A"), (12,0,"#FFA07A"), (12,1,"#FFA07A"), (12,2,"#FFA07A"), (12,3,"#FFA07A"), (12,4,"#FFA07A"), (12,5,"#FFA07A"), (12,6,"#FFA07A"), (12,7,"#FFA07A"), (12,8,"#FFA07A"), (12,9,"#FFA07A"), (12,10,"#AAAAAA"), (12,11,"#B5B3F5"), (12,12,"#FFFFFF"), (12,13,"#FFFFFF"), (12,14,"#FFFFFF"), (12,15,"#FFFFFF"), (12,16,"#B5B3F5"), (12,17,"#AAAAAA"), (12,18,"#FFA07A"), (12,19,"#FFA07A"), (12,20,"#FFA07A"), (13,1,"#FFA07A"), (13,2,"#FFA07A"), (13,3,"#FFA07A"), (13,4,"#FFA07A"), (13,5,"#FFA07A"), (13,6,"#FFA07A"), (13,7,"#FFA07A"), (13,8,"#FFA07A"), (13,9,"#FFA07A"), (13,10,"#FFA07A"), (13,11,"#AAAAAA"), (13,12,"#AAAAAA"), (13,13,"#AAAAAA"), (13,14,"#AAAAAA"), (13,15,"#AAAAAA"), (13,16,"#AAAAAA"), (13,17,"#FFA07A"), (13,18,"#FFA07A"), (13,19,"#FFA07A"), (13,20,"#FFA07A"), (14,4,"#FFA07A"), (14,8,"#FFA07A"), (14,9,"#FFA07A"), (14,10,"#FFA07A"), (14,11,"#FFA07A"), (14,12,"#FFA07A"), (14,13,"#FFA07A"), (14,14,"#FFA07A"), (14,15,"#FFA07A"), (14,16,"#FFA07A"), (14,17,"#FFA07A"), (14,18,"#FFA07A"), (14,19,"#FFA07A"), (14,20,"#8B4513"), (14,21,"#8B4513"), (14,22,"#FF0000"), (14,23,"#FFFF00"), (15,4,"#FFA07A"), (15,10,"#FFA07A"), (15,11,"#FFA07A"), (15,12,"#FFA07A"), (15,13,"#FFA07A"), (15,14,"#FFA07A"), (15,15,"#FFA07A"), (15,16,"#FFA07A"), (15,17,"#FFA07A"), (15,18,"#FFA07A"), (15,19,"#8B4513"), (15,20,"#8B4513"), (15,21,"#FF0000"), (15,22,"#FFFF00"), (15,23,"#FF0000"), (16,2,"#4C3A23"), (16,3,"#4C3A23"), (16,4,"#4C3A23"), (16,5,"#4C3A23"), (16,6,"#4C3A23"), (16,17,"#FFA07A"), (17,1,"#4C3A23"), (17,2,"#4C3A23"), (17,3,"#4C3A23"), (17,4,"#4C3A23"), (17,5,"#4C3A23"), (17,6,"#4C3A23"), (17,7,"#4C3A23"), (17,14,"#4C3A23"), (17,15,"#4C3A23"), (17,16,"#4C3A23"), (17,17,"#4C3A23"), (17,18,"#4C3A23"), (17,19,"#4C3A23"), (17,20,"#4C3A23"), (18,1,"#4C3A23"), (18,2,"#4C3A23"), (18,3,"#4C3A23"), (18,4,"#4C3A23"), (18,5,"#4C3A23"), (18,6,"#4C3A23"), (18,7,"#4C3A23"), (18,13,"#4C3A23"), (18,14,"#4C3A23"), (18,15,"#4C3A23"), (18,16,"#4C3A23"), (18,17,"#4C3A23"), (18,18,"#4C3A23"), (18,19,"#4C3A23"), (18,20,"#4C3A23"), (18,21,"#4C3A23"), (19,1,"#4C3A23"), (19,2,"#4C3A23"), (19,3,"#4C3A23"), (19,4,"#4C3A23"), (19,5,"#4C3A23"), (19,6,"#4C3A23"), (19,7,"#4C3A23"), (19,13,"#4C3A23"), (19,14,"#4C3A23"), (19,15,"#4C3A23"), (19,16,"#4C3A23"), (19,17,"#4C3A23"), (19,18,"#4C3A23"), (19,19,"#4C3A23"), (19,20,"#4C3A23"), (19,21,"#4C3A23"), (20,1,"#4C3A23"), (20,2,"#4C3A23"), (20,3,"#4C3A23"), (20,4,"#4C3A23"), (20,5,"#4C3A23"), (20,6,"#4C3A23"), (20,7,"#4C3A23"), (20,13,"#4C3A23"), (20,14,"#4C3A23"), (20,15,"#4C3A23"), (20,16,"#4C3A23"), (20,17,"#4C3A23"), (20,18,"#4C3A23"), (20,19,"#4C3A23"), (20,20,"#4C3A23"), (20,21,"#4C3A23"), (21,2,"#4C3A23"), (21,3,"#4C3A23"), (21,4,"#4C3A23"), (21,5,"#4C3A23"), (21,6,"#4C3A23"), (21,13,"#4C3A23"), (21,14,"#4C3A23"), (21,15,"#4C3A23"), (21,16,"#4C3A23"), (21,17,"#4C3A23"), (21,18,"#4C3A23"), (21,19,"#4C3A23"), (21,20,"#4C3A23"), (21,21,"#4C3A23"), (22,13,"#4C3A23"), (22,14,"#4C3A23"), (22,15,"#4C3A23"), (22,16,"#4C3A23"), (22,17,"#4C3A23"), (22,18,"#4C3A23"), (22,19,"#4C3A23"), (22,20,"#4C3A23"), (22,21,"#4C3A23"), (23,14,"#4C3A23"), (23,15,"#4C3A23"), (23,16,"#4C3A23"), (23,17,"#4C3A23"), (23,18,"#4C3A23"), (23,19,"#4C3A23"), (23,20,"#4C3A23")]
 charPopsicle = [(0,1,"#8B4513"), (0,2,"#8B4513"), (0,3,"#8B4513"), (0,4,"#8B4513"), (0,5,"#8B4513"), (0,6,"#8B4513"), (0,7,"#8B4513"), (0,8,"#8B4513"), (0,9,"#8B4513"), (0,10,"#8B4513"), (0,11,"#8B4513"), (1,0,"#8B4513"), (1,1,"#8B4513"), (1,2,"#FFFFFF"), (1,3,"#FFFFFF"), (1,4,"#FFFFFF"), (1,5,"#8B4513"), (1,6,"#8B4513"), (1,7,"#8B4513"), (1,8,"#8B4513"), (1,9,"#8B4513"), (1,10,"#8B4513"), (1,11,"#FFFFFF"), (1,12,"#FFFFFF"), (2,0,"#8B4513"), (2,1,"#8B4513"), (2,2,"#8B4513"), (2,3,"#8B4513"), (2,4,"#8B4513"), (2,5,"#8B4513"), (2,6,"#8B4513"), (2,7,"#8B4513"), (2,8,"#8B4513"), (2,9,"#8B4513"), (2,10,"#8B4513"), (2,11,"#8B4513"), (2,12,"#FFFFFF"), (3,0,"#8B4513"), (3,1,"#8B4513"), (3,2,"#8B4513"), (3,3,"#8B4513"), (3,4,"#8B4513"), (3,5,"#8B4513"), (3,6,"#8B4513"), (3,7,"#8B4513"), (3,8,"#8B4513"), (3,9,"#8B4513"), (3,10,"#8B4513"), (3,11,"#FFFFFF"), (3,12,"#FFFFFF"), (3,13,"#C19153"), (3,14,"#C19153"), (3,15,"#C19153"), (3,16,"#C19153"), (3,17,"#C19153"), (4,0,"#8B4513"), (4,1,"#8B4513"), (4,2,"#8B4513"), (4,3,"#8B4513"), (4,4,"#8B4513"), (4,5,"#8B4513"), (4,6,"#8B4513"), (4,7,"#8B4513"), (4,8,"#8B4513"), (4,9,"#8B4513"), (4,10,"#8B4513"), (4,11,"#8B4513"), (4,12,"#FFFFFF"), (4,13,"#C19153"), (4,14,"#C19153"), (4,15,"#C19153"), (4,16,"#C19153"), (4,17,"#C19153"), (5,0,"#8B4513"), (5,1,"#8B4513"), (5,2,"#8B4513"), (5,3,"#8B4513"), (5,4,"#8B4513"), (5,5,"#8B4513"), (5,6,"#8B4513"), (5,7,"#8B4513"), (5,8,"#8B4513"), (5,9,"#8B4513"), (5,10,"#8B4513"), (5,11,"#8B4513"), (5,12,"#FFFFFF"), (6,0,"#8B4513"), (6,1,"#8B4513"), (6,2,"#8B4513"), (6,3,"#8B4513"), (6,4,"#8B4513"), (6,5,"#8B4513"), (6,6,"#8B4513"), (6,7,"#8B4513"), (6,8,"#8B4513"), (6,9,"#8B4513"), (6,10,"#8B4513"), (6,11,"#FFFFFF"), (6,12,"#FFFFFF"), (7,1,"#8B4513"), (7,2,"#8B4513"), (7,3,"#8B4513"), (7,4,"#8B4513"), (7,5,"#8B4513"), (7,6,"#8B4513"), (7,7,"#8B4513"), (7,8,"#8B4513"), (7,9,"#8B4513"), (7,10,"#8B4513"), (7,11,"#8B4513")]
@@ -251,7 +250,7 @@ def bump():
 
 
 def gameloop():
-    global HitWall, score, highscore, mathstring, FirstEval, GameRunning, GameComplete, Stopping
+    global HitWall, score, highscore, mathstring, FirstEval, FirstEvalB, GameRunning, GameComplete, Stopping
     if LEVELSTART == 0: myship.dx = 2
     if PlayerAlive or LEVELSTART == 0: myship.move()
     for fruit in fruitlist:
@@ -264,11 +263,32 @@ def gameloop():
                fruit.undraw()
                fruitlist.remove(fruit)
                score = score + fruit.PointsType
+            if fruit.typestring == FirstEvalB:  
+               displaystring = "1+2=3"
+               displaymathB2.update("= 3+3")
+               LEDlib.LEDtextobj(canvas1,x=fruit.x,y=fruit.y,text=displaystring,colour="light green",pixelsize = 2, charwidth=16, multicolour=True, plusorder = ["white"], solid = True)
+               FirstEvalB = ""
+               fruit.undraw()
+               fruitlist.remove(fruit)
+               score = score + fruit.PointsType
             elif fruit.typestring == SecondEval: 
                if FirstEval == "":
                   displaystring = "1+5=6"
                   displaymath3.update("= 6")
                   LEDlib.LEDtextobj(canvas1,x=fruit.x,y=fruit.y,text=displaystring,colour="light green",pixelsize = 2, charwidth=16, multicolour=True, plusorder = ["red"], solid = True)
+                  fruit.undraw()
+                  fruitlist.remove(fruit)
+                  score = score + fruit.PointsType
+                  score = score + bonus
+                  GameRunning = False
+                  GameComplete = True
+               else:
+                   bump()
+            elif fruit.typestring == SecondEvalB: 
+               if FirstEvalB == "":
+                  displaystring = "3+3=6"
+                  displaymathB3.update("= 6")
+                  LEDlib.LEDtextobj(canvas1,x=fruit.x,y=fruit.y,text=displaystring,colour="light green",pixelsize = 2, charwidth=16, multicolour=True, plusorder = ["purple"], solid = True)
                   fruit.undraw()
                   fruitlist.remove(fruit)
                   score = score + fruit.PointsType
