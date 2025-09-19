@@ -1,3 +1,13 @@
+global.screentext = ds_list_create();
+ds_list_add(global.screentext, "Line 1")
+ds_list_add(global.screentext, "Line 2")
+ds_list_add(global.screentext, "Line 3")
+
+global.inputtext = ""
+global.guessnumber = 1
+
+ addtext("a new line");  // addtext defined below :)
+
 global.ONE = [
     [1,6], [2,1], [2,6], [3,0], [3,1], [3,2], [3,3], [3,4], [3,5], [3,6],
     [4,0], [4,1], [4,2], [4,3], [4,4], [4,5], [4,6], [5,6], [6,6]
@@ -290,17 +300,34 @@ global.charQ = [
     [6,7],[7,7]
 ];
 
-function ColourChar(xloc, yloc, coord_array, mycolor,charsize) {
+function ColourChar(xloc, yloc, coord_array, mycolor,charsize,solid) {
     for (var i = 0; i < array_length(coord_array); i++) {
         var xs = xloc+coord_array[i][0] * charsize;
         var ys = yloc+ coord_array[i][1] * charsize;
-        draw_set_color(mycolor);
+		draw_set_color(c_black);
+		//draw_rectangle(xs, ys, xs + charsize, ys + charsize, false);	
+		draw_set_color(mycolor);
+		if (solid == true)
+		{
         draw_rectangle(xs, ys, xs + charsize, ys + charsize, false);
+		}
+		else
+		{
+		 //draw_rectangle(xs+1, ys+1, xs + charsize-1, ys + charsize-1, true);
+	
+		 draw_point(xs+1,ys)
+		 if (charsize > 2)
+		 {
+		  draw_point(xs+1,ys-1)
+		   draw_point(xs+2,ys)
+		  draw_point(xs+2,ys-1)
+		 }
+		}
     }
 }
 
 
-function ColourText(xloc, ys, mytext, colour, charwidth,charsize)
+function ColourText(xloc, ys, mytext, colour, charwidth,charsize,solid)
 {
     var digits = [global.ZERO, global.ONE, global.TWO, global.THREE, global.FOUR, global.FIVE, global.SIX, global.SEVEN, global.EIGHT, global.NINE];
     mytext = string_upper(mytext);
@@ -327,25 +354,25 @@ function ColourText(xloc, ys, mytext, colour, charwidth,charsize)
             switch (c) {
                 case "0": case "1": case "2": case "3": case "4":
                 case "5": case "6": case "7": case "8": case "9":
-                    ColourChar( xs, ys, digits[real(c)], colour,charsize);
+                    ColourChar( xs, ys, digits[real(c)], colour,charsize,solid);
                     break;
                 case "%":
-                    ColourChar( xs, ys, charPercent, colour,charsize);
+                    ColourChar( xs, ys, charPercent, colour,charsize,solid);
                     break;
                 case ".":
                     AdjustPos -= 2 * charwidth / 8;
-					ColourChar( xs, ys, charDot, colour,charsize);
+					ColourChar( xs, ys, charDot, colour,charsize,solid);
                     break;
                 case ":":
                     AdjustPos -= 2 * charwidth / 8;
-					ColourChar( xs, ys, charColon, colour,charsize);
+					ColourChar( xs, ys, charColon, colour,charsize,solid);
                     break;
                 case "+":
                    // var newcolour = colour;
                    // if (multicolour && PlusCount < array_length(plusorder)) {
                   //      newcolour = plusorder[PlusCount];
                    // }
-				   ColourChar( xs, ys, PLUS, colour,charsize);
+				   ColourChar( xs, ys, PLUS, colour,charsize,solid);
                     PlusCount += 1;
                     break;
                 case "*":
@@ -366,7 +393,7 @@ function ColourText(xloc, ys, mytext, colour, charwidth,charsize)
                 default:
                     var index = ord(c) - 65;
                     if (index >= 0 && index < array_length(charactermap)) {
-						ColourChar( xs, ys, charactermap[index], colour, charsize);
+						ColourChar( xs, ys, charactermap[index], colour, charsize,solid);
                     }
                     break;
             }
@@ -376,5 +403,23 @@ function ColourText(xloc, ys, mytext, colour, charwidth,charsize)
             AdjustPos -= charwidth / 8;
         }
     }
+}
+
+function printscreen()
+{
+	    for (var i = 0; i < ds_list_size(global.screentext); i++) 
+		{
+			ColourText(20,300+i*30,ds_list_find_value(global.screentext, i),#98FB98,26,3,false);
+		}
+}
+
+function printinputtext()
+{
+  ColourText(860,300,global.inputtext,#98FB98,26,3,false);
+}
+
+function addtext(mytext)
+{
+	ds_list_add(global.screentext, mytext);
 }
 
